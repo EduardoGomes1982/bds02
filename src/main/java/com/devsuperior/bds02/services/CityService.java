@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.bds02.dto.CityDTO;
@@ -33,6 +34,7 @@ public class CityService {
         return new CityDTO(entity);
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         try {
 			repository.deleteById(id);
